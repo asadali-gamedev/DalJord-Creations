@@ -1,0 +1,21 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 600" role="img" aria-label="DalJord Creations studio scene">
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f6fff4"/>
+      <stop offset="1" stop-color="#d6f0d8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="600" rx="28" fill="url(#g1)" stroke="#c7e3c7"/>
+  <rect x="80" y="100" width="1040" height="400" rx="24" fill="#ffffff"/>
+  <g>
+    <rect x="120" y="150" width="320" height="200" rx="18" fill="#e4f2e4"/>
+    <rect x="470" y="150" width="320" height="200" rx="18" fill="#e4f2e4"/>
+    <rect x="820" y="150" width="260" height="200" rx="18" fill="#e4f2e4"/>
+  </g>
+  <g>
+    <rect x="160" y="380" width="220" height="40" rx="10" fill="#bfe6b9"/>
+    <rect x="420" y="380" width="260" height="40" rx="10" fill="#bfe6b9"/>
+    <rect x="740" y="380" width="260" height="40" rx="10" fill="#bfe6b9"/>
+  </g>
+  <text x="600" y="520" text-anchor="middle" font-family="Sora, Arial" font-size="28" fill="#2e7d32">DalJord Creations Studio</text>
+</svg>

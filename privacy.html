@@ -1,0 +1,430 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Privacy Policy | DalJord Creations</title>
+  <meta name="description" content="Privacy Policy for DalJord Creations and Idle Farm Tycoon. We prioritize user privacy and transparent data practices.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://daljordcreations.com/privacy.html">
+  <meta name="theme-color" content="#0a0f16">
+
+  <meta property="og:title" content="Privacy Policy | DalJord Creations">
+  <meta property="og:description" content="How DalJord Creations collects and protects data for Idle Farm Tycoon.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://daljordcreations.com/privacy.html">
+
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700&family=Rajdhani:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="icon" href="assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="assets/img/favicon-48.png" sizes="48x48" type="image/png">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+    :root {
+      --security-green: #27d9f8;
+      --security-bg: #0a0f16;
+      --panel-bg: rgba(12, 16, 24, 0.95);
+    }
+
+    body {
+      background-color: var(--security-bg);
+      font-family: "Rajdhani", sans-serif;
+      color: #e0e6ed;
+    }
+
+    .bg-matrix {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background-image:
+        linear-gradient(rgba(99, 242, 143, 0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(99, 242, 143, 0.04) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+    }
+
+    .policy-hero {
+      padding: 140px 0 70px;
+      position: relative;
+      text-align: center;
+    }
+
+    .policy-hero h1 {
+      font-family: "Orbitron", sans-serif;
+      font-size: clamp(36px, 7vw, 74px);
+      color: #fff;
+      text-transform: uppercase;
+      text-shadow: 0 0 20px rgba(99, 242, 143, 0.45);
+      margin-bottom: 16px;
+      letter-spacing: 3px;
+    }
+
+    .status-badge {
+      display: inline-block;
+      border: 1px solid var(--security-green);
+      color: var(--security-green);
+      padding: 6px 18px;
+      font-family: "Orbitron", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      background: rgba(99, 242, 143, 0.12);
+      margin-bottom: 24px;
+      box-shadow: 0 0 15px rgba(99, 242, 143, 0.2);
+    }
+
+    .policy-grid-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 240px) minmax(0, 1fr);
+      gap: 28px;
+      align-items: start;
+    }
+
+    .policy-nav-wrap {
+      position: sticky;
+      top: 120px;
+    }
+
+    .policy-nav {
+      list-style: none;
+      padding: 0;
+      border-left: 2px solid rgba(255, 255, 255, 0.12);
+      margin: 0;
+    }
+
+    .policy-nav a {
+      display: block;
+      padding: 10px 18px;
+      color: rgba(255, 255, 255, 0.6);
+      text-decoration: none;
+      font-size: 13px;
+      text-transform: uppercase;
+      transition: all 0.2s;
+      position: relative;
+    }
+
+    .policy-nav a:hover {
+      color: var(--security-green);
+      background: linear-gradient(90deg, rgba(99, 242, 143, 0.08), transparent);
+      padding-left: 24px;
+    }
+
+    .data-node {
+      background: var(--panel-bg);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 34px;
+      margin-bottom: 24px;
+      position: relative;
+      border-left: 4px solid var(--security-green);
+      transition: all 0.2s ease;
+    }
+
+    .data-node::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 90px;
+      height: 90px;
+      background: linear-gradient(135deg, transparent 50%, rgba(99, 242, 143, 0.05) 50%);
+      pointer-events: none;
+    }
+
+    .node-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 12px;
+      gap: 16px;
+    }
+
+    .node-icon {
+      width: 46px;
+      height: 46px;
+      background: rgba(99, 242, 143, 0.12);
+      border: 1px solid var(--security-green);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--security-green);
+      font-size: 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .node-title {
+      font-family: "Orbitron", sans-serif;
+      color: #fff;
+      margin: 0;
+      font-size: 22px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .node-content {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #b9c5d4;
+    }
+
+    .node-content ul {
+      list-style: none;
+      padding-left: 0;
+      margin-top: 12px;
+    }
+
+    .node-content ul li {
+      position: relative;
+      padding-left: 22px;
+      margin-bottom: 8px;
+    }
+
+    .node-content ul li::before {
+      content: '>'; 
+      position: absolute;
+      left: 0;
+      color: var(--security-green);
+      font-family: monospace;
+    }
+
+    .node-content a {
+      color: var(--security-green);
+      text-decoration: none;
+      border-bottom: 1px dotted var(--security-green);
+    }
+
+    @media (max-width: 980px) {
+      .policy-grid-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .policy-nav-wrap {
+        position: static;
+      }
+
+      .policy-nav {
+        border-left: none;
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        display: grid;
+        grid-auto-flow: column;
+        overflow-x: auto;
+        gap: 8px;
+        padding-top: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-matrix"></div>
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <nav class="navbar navbar-expand-lg site-header navbar-dark">
+    <div class="container">
+      <a class="navbar-brand brand" href="index.html" aria-label="DalJord Creations home">
+        <img src="assets/img/logo.png" alt="DalJord Creations logo" width="46" height="46">
+        <span>DalJord Creations</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#primary-nav" aria-controls="primary-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse nav-links" id="primary-nav">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-3">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="privacy.html">Privacy Policy</a></li>
+          <li class="nav-item"><a class="nav-link" href="terms.html">Terms</a></li>
+          <li class="nav-item">
+            <a class="nav-link store" href="index.html#contact">
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main" class="policy-wrapper">
+    <section class="policy-hero">
+      <div class="container">
+        <div class="status-badge">DATA VAULT // SECURE</div>
+        <h1>Privacy Data Vault</h1>
+        <p class="lead" style="max-width: 640px; margin: 0 auto;">Transparency is our core directive. Accessing DalJord Creations data collection and security protocols.</p>
+      </div>
+    </section>
+
+    <section class="container" style="padding-bottom: 90px;">
+      <div class="policy-grid-layout">
+        <div class="policy-nav-wrap">
+          <ul class="policy-nav">
+            <li><a href="#intro">01. Introduction</a></li>
+            <li><a href="#collect">02. Information Collection</a></li>
+            <li><a href="#usage">03. Data Usage</a></li>
+            <li><a href="#thirdparty">04. Third‑Party Services</a></li>
+            <li><a href="#sharing">05. Data Disclosure</a></li>
+            <li><a href="#children">06. Children’s Privacy</a></li>
+            <li><a href="#security">07. Data Security</a></li>
+            <li><a href="#contact">08. Contact</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div id="intro" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">01</div>
+              <h3 class="node-title">Introduction Protocol</h3>
+            </div>
+            <div class="node-content">
+              <p><strong>Developer:</strong> DalJord Creations<br>
+                <strong>Contact Email:</strong> <a href="mailto:daljordcreations@gmail.com">daljordcreations@gmail.com</a><br>
+                <strong>Last Updated:</strong> February 23, 2026
+              </p>
+              <p>Welcome to <strong>DalJord Creations</strong>. We are committed to protecting your privacy and ensuring transparency in how we handle your data when you play <strong>Idle Farm Tycoon</strong>.</p>
+            </div>
+          </div>
+
+          <div id="collect" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">02</div>
+              <h3 class="node-title">Information Collection</h3>
+            </div>
+            <div class="node-content">
+              <ul>
+                <li><strong>Device information:</strong> model, OS version, language, IP address, and crash logs.</li>
+                <li><strong>Advertising identifiers:</strong> mobile advertising ID (AAID/IDFA).</li>
+                <li><strong>Gameplay analytics:</strong> session length, progress milestones, feature usage.</li>
+                <li><strong>In‑app purchase data:</strong> receipt confirmations from Apple App Store and Google Play.</li>
+              </ul>
+              <p>We do not require user login or account creation to play.</p>
+            </div>
+          </div>
+
+          <div id="usage" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">03</div>
+              <h3 class="node-title">Data Usage</h3>
+            </div>
+            <div class="node-content">
+              <ul>
+                <li>Operate and improve gameplay features.</li>
+                <li>Measure performance, stability, and crashes.</li>
+                <li>Deliver ads and measure ad performance.</li>
+                <li>Respond to support requests.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div id="thirdparty" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">04</div>
+              <h3 class="node-title">Third‑Party Services</h3>
+            </div>
+            <div class="node-content">
+              <p>We use third‑party services that may collect data under their own policies:</p>
+              <ul>
+                <li><strong>Unity Ads</strong> (advertising) — <a href="https://unity.com/legal/privacy-policy" target="_blank" rel="noopener">Policy</a></li>
+                <li><strong>Google AdMob</strong> (advertising) — <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Policy</a></li>
+                <li><strong>Firebase Analytics</strong> (analytics) — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Policy</a></li>
+                <li><strong>Firebase Crashlytics</strong> (crash reporting) — <a href="https://firebase.google.com/support/privacy" target="_blank" rel="noopener">Policy</a></li>
+              </ul>
+              <p>In‑app purchases are processed by the <strong>Apple App Store</strong> and <strong>Google Play</strong>. We do not store payment card details.</p>
+            </div>
+          </div>
+
+          <div id="sharing" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">05</div>
+              <h3 class="node-title">Data Disclosure</h3>
+            </div>
+            <div class="node-content">
+              <p><strong>We do not sell your personal data.</strong> We share data only with service providers listed above or when required by law.</p>
+            </div>
+          </div>
+
+          <div id="children" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">06</div>
+              <h3 class="node-title">Children’s Privacy</h3>
+            </div>
+            <div class="node-content">
+              <p>Our games are not directed to children under 13. We do not knowingly collect personal data from children. If we learn we have done so, we will delete it promptly.</p>
+            </div>
+          </div>
+
+          <div id="security" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">07</div>
+              <h3 class="node-title">Data Security</h3>
+            </div>
+            <div class="node-content">
+              <p>We use commercially reasonable safeguards to protect information. No system is completely secure, but we continuously work to protect data from unauthorized access.</p>
+            </div>
+          </div>
+
+          <div id="contact" class="data-node">
+            <div class="node-header">
+              <div class="node-icon">08</div>
+              <h3 class="node-title">Contact Protocol</h3>
+            </div>
+            <div class="node-content">
+              <p>For privacy inquiries, contact: <a href="mailto:daljordcreations@gmail.com">daljordcreations@gmail.com</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-brand">
+            <img src="assets/img/logo.png" alt="DalJord Creations logo" width="36" height="36">
+            <span>DalJord Creations</span>
+          </div>
+          <p>Indie mobile games with calm progression and delightful polish.</p>
+          <div class="socials" aria-label="Social media links">
+            <a href="#" aria-label="Facebook">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+            </a>
+            <a href="#" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1"/></svg>
+            </a>
+            <a href="#" aria-label="X">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4l16 16M20 4L4 20"/></svg>
+            </a>
+            <a href="#" aria-label="YouTube">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 8s0-4-4-4H6C2 4 2 8 2 8v8s0 4 4 4h12c4 0 4-4 4-4z"/><path d="M10 9l5 3-5 3z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h3>Contact</h3>
+          <p>Email: <a href="mailto:daljordcreations@gmail.com">daljordcreations@gmail.com</a></p>
+        </div>
+        <div>
+          <h3>Policies</h3>
+          <div class="footer-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms & Conditions</a>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>Copyright 2026 DalJord Creations. All rights reserved.</span>
+        <div class="footer-links">
+          <a href="privacy.html">Privacy</a>
+          <a href="terms.html">Terms</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+</html>

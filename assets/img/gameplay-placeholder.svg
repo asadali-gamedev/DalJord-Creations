@@ -1,0 +1,15 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Gameplay preview placeholder">
+  <defs>
+    <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f0fff4"/>
+      <stop offset="1" stop-color="#c7f9cc"/>
+    </linearGradient>
+  </defs>
+  <rect width="600" height="360" rx="24" fill="url(#g)" stroke="#93d5a3"/>
+  <rect x="40" y="40" width="520" height="80" rx="16" fill="#ffffff" stroke="#d9ead3"/>
+  <rect x="40" y="140" width="240" height="180" rx="16" fill="#e9f5db" stroke="#c7e9c0"/>
+  <rect x="320" y="140" width="240" height="180" rx="16" fill="#e9f5db" stroke="#c7e9c0"/>
+  <circle cx="120" cy="220" r="36" fill="#7ecf7a"/>
+  <rect x="380" y="200" width="120" height="80" rx="12" fill="#f4a261"/>
+  <text x="300" y="95" text-anchor="middle" font-family="Arial" font-size="24" fill="#2f5233">Idle Farm Tycoon</text>
+</svg>

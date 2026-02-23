@@ -1,0 +1,54 @@
+﻿<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" role="img" aria-label="Idle Farm Tycoon hero artwork">
+  <defs>
+    <linearGradient id="sky" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0" stop-color="#f4fff4"/>
+      <stop offset="1" stop-color="#cfeecd"/>
+    </linearGradient>
+    <linearGradient id="field" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0" stop-color="#bfe6b9"/>
+      <stop offset="1" stop-color="#91d79a"/>
+    </linearGradient>
+    <linearGradient id="roof" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#f28482"/>
+      <stop offset="1" stop-color="#e85d5d"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="720" fill="url(#sky)"/>
+  <path d="M0 420c180-70 360-70 540 0s360 70 660 0v300H0z" fill="url(#field)"/>
+  <path d="M0 510c220-60 440-60 660 0s360 60 540 0v210H0z" fill="#79c98a"/>
+  <g>
+    <circle cx="100" cy="120" r="50" fill="#ffe066"/>
+    <g stroke="#ffe066" stroke-width="6">
+      <line x1="100" y1="36" x2="100" y2="10"/>
+      <line x1="100" y1="206" x2="100" y2="230"/>
+      <line x1="16" y1="120" x2="-10" y2="120"/>
+      <line x1="184" y1="120" x2="210" y2="120"/>
+      <line x1="40" y1="60" x2="20" y2="40"/>
+      <line x1="160" y1="60" x2="180" y2="40"/>
+    </g>
+  </g>
+  <g>
+    <rect x="170" y="310" width="260" height="160" rx="16" fill="#f7e7c7" stroke="#d9c6a3"/>
+    <polygon points="140,310 300,210 460,310" fill="url(#roof)"/>
+    <rect x="280" y="360" width="60" height="110" rx="8" fill="#9c6644"/>
+    <rect x="200" y="350" width="60" height="50" rx="8" fill="#90be6d"/>
+  </g>
+  <g>
+    <rect x="640" y="270" width="320" height="210" rx="18" fill="#f2e9e4" stroke="#d0c2b9"/>
+    <polygon points="610,270 800,160 990,270" fill="#f3722c"/>
+    <rect x="760" y="340" width="80" height="140" rx="10" fill="#9c6644"/>
+    <rect x="670" y="330" width="80" height="60" rx="10" fill="#84a59d"/>
+    <rect x="860" y="330" width="80" height="60" rx="10" fill="#84a59d"/>
+  </g>
+  <g>
+    <rect x="70" y="460" width="26" height="90" fill="#6b705c"/>
+    <circle cx="83" cy="450" r="30" fill="#7bcf86"/>
+    <rect x="1060" y="460" width="26" height="90" fill="#6b705c"/>
+    <circle cx="1073" cy="450" r="30" fill="#7bcf86"/>
+  </g>
+  <g>
+    <rect x="460" y="440" width="280" height="120" rx="18" fill="#fff" opacity="0.75"/>
+    <text x="600" y="490" text-anchor="middle" font-family="Sora, Arial" font-size="32" fill="#2e7d32">Idle Farm Tycoon</text>
+    <text x="600" y="525" text-anchor="middle" font-family="Source Sans 3, Arial" font-size="18" fill="#4f5f4f">Relax. Build. Expand. Prosper.</text>
+  </g>
+</svg>
