@@ -48,6 +48,8 @@
 *, *::before, *::after { box-sizing: inherit; }
 html {
   background: var(--void);
+  overflow-x: hidden;
+  overflow-x: clip;
   scroll-padding-top: calc(env(safe-area-inset-top, 0px) + var(--nav-h) + 12px);
   -webkit-text-size-adjust: 100%;
 }
@@ -89,9 +91,9 @@ p { margin: 0; }
   --bc: var(--cyan);
   position: relative;
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
-  min-height: 52px; padding: 0 1.6rem;
+  min-height: 52px; padding: .8rem 1.6rem;
   border-radius: 999px; border: 1px solid transparent;
-  font: 600 1rem var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  font: 600 1rem/1.35 var(--body); text-decoration: none; text-align: center; cursor: pointer;
   transition: box-shadow .35s, background .25s, border-color .25s, color .25s;
   will-change: transform;
 }
@@ -102,7 +104,7 @@ p { margin: 0; }
 .btn--ghost:hover { border-color: var(--magenta); box-shadow: 0 0 30px rgba(255, 70, 214, .38); }
 .btn--store { width: 100%; background: rgba(255, 255, 255, .06); border-color: var(--line); }
 .btn--store:hover { background: var(--bc); border-color: var(--bc); color: #05030f; box-shadow: 0 0 34px color-mix(in srgb, var(--bc) 60%, transparent); }
-.btn .btn__label { position: relative; z-index: 1; }
+.btn .btn__label { position: relative; z-index: 1; min-width: 0; overflow-wrap: anywhere; }
 
 /* ---------- chips ---------- */
 .chip { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 600; padding: .3rem .8rem; border-radius: 999px; border: 1px solid currentColor; line-height: 1.25; white-space: nowrap; }

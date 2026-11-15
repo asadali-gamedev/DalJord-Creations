@@ -32,12 +32,14 @@
     <section class="hero" data-hero aria-labelledby="home-title">
       <div class="wrap">
         <div class="hero__copy">
-          <h1 id="home-title" data-split>Work hard.<br>Play harder.</h1>
+          <p class="hero__eyebrow" data-reveal><span></span>Independent game studio</p>
+          <h1 id="home-title" data-split>Work hard.<br><span class="hero__accent">Play harder.</span></h1>
           <p class="hero__sub" data-reveal style="--d:.55s">Daljord Creations is an independent studio making mobile and PC games with depth, progression and character.</p>
           <div class="hero__cta" data-reveal style="--d:.7s">
             <a class="btn btn--main" data-magnetic href="games/index.html"><span class="btn__label">See our games</span></a>
             <a class="btn btn--ghost" data-magnetic href="#play"><span class="btn__label">Play the demo</span></a>
           </div>
+          <div class="hero__details" data-reveal style="--d:.85s"><span>Mobile + PC</span><span>Small team. Big worlds.</span></div>
         </div>
       </div>
       <p class="hero__hint" aria-hidden="true"><b>✦</b>Tap the shield</p>
@@ -51,7 +53,7 @@
     <section class="block" id="featured" aria-labelledby="featured-title">
       <div class="wrap">
         <div class="head">
-          <h2 id="featured-title" data-scramble>Out now on Google Play</h2>
+          <h2 id="featured-title" data-text-reveal>Out now on Google Play</h2>
           <div>
             <p class="lede" data-reveal>Our released games, each with its official download link.</p>
             <a class="big-link" href="games/index.html" data-reveal style="--d:.1s">Explore the collection <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -64,7 +66,7 @@
     <section class="block" id="play" aria-labelledby="play-title">
       <div class="wrap demo">
         <div>
-          <h2 id="play-title" data-scramble>Set off a chain reaction</h2>
+          <h2 id="play-title" data-text-reveal>Set off a chain reaction</h2>
           <p class="lede" style="margin-top:1.2rem" data-reveal>A quick browser demo inspired by Chain Reactor: Tap Puzzle. One tap per round, so pick your moment.</p>
           <ol class="demo__steps" data-reveal style="--d:.1s">
             <li>Tap anywhere in the arena to drop a blast.</li>
@@ -84,7 +86,7 @@
     <section class="block" id="workshop" aria-labelledby="workshop-title">
       <div class="wrap">
         <div class="head">
-          <h2 id="workshop-title" data-scramble>In the workshop</h2>
+          <h2 id="workshop-title" data-text-reveal>In the workshop</h2>
           <div>
             <p class="lede" data-reveal>The projects we’re ready to show, from early concept to active development.</p>
             <a class="big-link" href="projects/index.html" data-reveal style="--d:.1s">See the full pipeline <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
@@ -97,7 +99,7 @@
     <section class="block" id="latest" aria-labelledby="latest-title">
       <div class="wrap home-update">
         <div>
-          <h2 id="latest-title" data-scramble>Latest from the studio</h2>
+          <h2 id="latest-title" data-text-reveal>Latest from the studio</h2>
           <p class="lede" style="margin-top:1.2rem" data-reveal>Patches, milestones and announcements from behind the scenes.</p>
           <a class="big-link" href="updates/index.html" data-reveal style="--d:.1s">Read all updates <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
         </div>
@@ -145,6 +147,7 @@
   <script src="assets/js/data/updates.js"></script>
   <script src="assets/js/data/brand-texture.js"></script>
   <!-- Site code -->
+  <script src="assets/js/core/performance.js"></script>
   <script src="assets/js/core/layout.js"></script>
   <script src="assets/js/core/motion.js"></script>
   <script src="assets/js/components/render.js"></script>

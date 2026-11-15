@@ -41,7 +41,8 @@ DJ.chainDemo = (function () {
     const ease = t => 1 - Math.pow(1 - t, 3);
 
     function size() {
-      const r = arena.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, 2);
+      const r = arena.getBoundingClientRect(), dpr = Math.min(devicePixelRatio || 1, DJ.performance.tier === "low" ? 1 : DJ.performance.mobile ? 1.25 : 2);
+      if (Math.abs(W - r.width) < 1 && Math.abs(H - r.height) < 1) return;
       const ow = W, oh = H; W = r.width; H = r.height; S = Math.min(W, H);
       cvs.width = W * dpr; cvs.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       if (ow) orbs.forEach(o => { o.x *= W / ow; o.y *= H / oh; });
@@ -59,7 +60,7 @@ DJ.chainDemo = (function () {
       $("lvl").textContent = level + 1; $("caught").textContent = 0; $("target").textContent = target;
     }
     function message(title, text, btn) { $("title").textContent = title; $("text").textContent = text; $("btn").querySelector(".btn__label").textContent = btn; panel.inert = false; panel.classList.remove("is-hidden"); }
-    function begin() { panel.classList.add("is-hidden"); panel.inert = true; state = "aim"; $("status").textContent = "Tap the arena to drop your blast."; cvs.focus({ preventScroll: true }); }
+    function begin() { panel.classList.add("is-hidden"); panel.inert = true; state = "aim"; $("status").textContent = "Tap the arena to drop your blast."; cvs.focus({ preventScroll: true }); resume(); }
     $("btn").addEventListener("click", () => {
       if (state === "aim" || state === "run") return;
       if (state === "won") level++;
@@ -97,7 +98,7 @@ DJ.chainDemo = (function () {
           if (dx * dx + dy * dy < (b.r + o.r) ** 2) {
             o.dead = true; caught++; $("caught").textContent = caught;
             blastAt(o.x, o.y, o.c); pops.push({ x: o.x, y: o.y, t: 0, n: caught });
-            for (let s = 0; s < 10; s++) { const a = Math.random() * Math.PI * 2, v = S * (.2 + Math.random() * .5); sparks.push({ x: o.x, y: o.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, t: 0, c: o.c }); }
+            for (let s = 0; s < (DJ.performance.mobile ? 4 : 10); s++) { const a = Math.random() * Math.PI * 2, v = S * (.2 + Math.random() * .5); sparks.push({ x: o.x, y: o.y, vx: Math.cos(a) * v, vy: Math.sin(a) * v, t: 0, c: o.c }); }
             const call = CALLS.filter(c => caught >= c[0]).pop();
             if (call && call[0] > lastCall) { lastCall = call[0]; callout = { text: call[1], t: 0 }; arena.classList.remove("is-shake"); void arena.offsetWidth; arena.classList.add("is-shake"); }
           }
@@ -153,11 +154,15 @@ DJ.chainDemo = (function () {
       }
     }
     function loop(ts) {
-      if (!visible) { raf = 0; return; }
+      raf = 0;
+      if (!visible || document.hidden || document.body.classList.contains("menu-open") || (state !== "aim" && state !== "run")) return;
       const dt = Math.min((ts - (last || ts)) / 1000, .04); last = ts;
       update(dt); draw(); raf = requestAnimationFrame(loop);
     }
-    new IntersectionObserver(es => { visible = es[0].isIntersecting; if (visible && !raf) { last = 0; raf = requestAnimationFrame(loop); } }).observe(arena);
+    function resume() { if (visible && !document.hidden && !document.body.classList.contains("menu-open") && !raf && (state === "aim" || state === "run")) { last = 0; raf = requestAnimationFrame(loop); } }
+    new IntersectionObserver(es => { visible = es[0].isIntersecting; resume(); }).observe(arena);
+    document.addEventListener("visibilitychange", () => { if (document.hidden) { cancelAnimationFrame(raf); raf = 0; } else resume(); });
+    document.addEventListener("dj:menu", e => { if (e.detail.open) { cancelAnimationFrame(raf); raf = 0; } else resume(); });
     new ResizeObserver(size).observe(arena);
     size(); setup();
     $("text").textContent = `Catch ${target} of ${orbs.length} orbs with a single blast.`;

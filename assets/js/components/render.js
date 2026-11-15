@@ -88,13 +88,13 @@ DJ.render = (function () {
       dots.forEach((b, i) => b.setAttribute("aria-current", String(i === active)));
     }
     function select(i) {
-      active = (i + G.length) % G.length;
+      active = ((i % G.length) + G.length) % G.length;
       const g = G[active];
       f("status").textContent = `${g.status} on ${g.store.name}`;
       f("title").textContent = g.title;
       f("summary").textContent = `${g.genre}. ${g.summary}`;
       f("store").innerHTML = storeBtn(g);
-      DJ.motion && DJ.motion.scramble && (delete f("title").dataset.done, DJ.motion.scramble(f("title")));
+      DJ.motion.revealText(f("title"));
       paint();
     }
     el.querySelectorAll(".flow__arrow").forEach(b => b.addEventListener("click", () => { select(active + +b.dataset.dir); restart(); }));
@@ -102,13 +102,18 @@ DJ.render = (function () {
     items.forEach(it => it.addEventListener("click", () => { if (!moved) select(+it.dataset.i); }));
     stage.addEventListener("keydown", e => { if (e.key === "ArrowLeft") select(active - 1); if (e.key === "ArrowRight") select(active + 1); });
     let moved = false;
-    stage.addEventListener("pointerdown", e => { drag = { x: e.clientX }; moved = false; stage.setPointerCapture(e.pointerId); stop(); });
+    stage.addEventListener("pointerdown", e => { if (!e.isPrimary || e.button !== 0) return; drag = { x: e.clientX }; moved = false; stage.setPointerCapture(e.pointerId); stop(); });
     stage.addEventListener("pointermove", e => { if (!drag) return; const dx = e.clientX - drag.x; if (Math.abs(dx) > 6) moved = true; paint(dx / Math.min(stage.clientWidth * .3, 330)); });
     const end = e => { if (!drag) return; const dx = e.clientX - drag.x; drag = null; if (Math.abs(dx) > 40) { const steps = Math.round(dx / Math.min(stage.clientWidth * .3, 330)) || Math.sign(dx); select(active - steps); } else paint(); restart(); };
-    stage.addEventListener("pointerup", end); stage.addEventListener("pointercancel", end);
+    stage.addEventListener("pointerup", end);
+    stage.addEventListener("pointercancel", () => { drag = null; moved = true; paint(); restart(); });
     const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
     function stop() { clearInterval(auto); }
-    function restart() { stop(); if (!reduced) auto = setInterval(() => select(active + 1), 5200); }
+    let visible = false;
+    function restart() { stop(); if (!reduced && !DJ.performance.mobile && visible && !document.hidden && !document.body.classList.contains("menu-open")) auto = setInterval(() => select(active + 1), 5200); }
+    new IntersectionObserver(entries => { visible = entries[0].isIntersecting; restart(); }).observe(stage);
+    document.addEventListener("visibilitychange", restart);
+    document.addEventListener("dj:menu", restart);
     stage.addEventListener("mouseenter", stop); stage.addEventListener("mouseleave", restart);
     addEventListener("resize", () => paint());
     select(active); restart();
@@ -127,7 +132,7 @@ DJ.render = (function () {
     el.innerHTML = DJ.projects.map(p => {
       const locked = !p.image;
       const art = locked
-        ? `<div class="proj__art"><div class="lockbox">${icon.lock}<span class="glitch" data-scramble>Classified</span><span>Revealed when it’s ready</span></div></div>`
+        ? `<div class="proj__art"><div class="lockbox">${icon.lock}<span class="glitch" data-text-reveal>Classified</span><span>Revealed when it’s ready</span></div></div>`
         : `<div class="proj__art"><img src="${u(p.image)}" alt="${esc(p.imageAlt)}" loading="lazy" data-py="50"></div>`;
       return `
       <div class="stack__item">

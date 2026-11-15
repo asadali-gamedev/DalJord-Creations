@@ -74,7 +74,7 @@ DJ.layout = (function () {
     body.appendChild(el);
     el.querySelector(".to-top").addEventListener("click", () => scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }));
     const word = el.querySelector(".footer__word");
-    word.parentElement.addEventListener("pointermove", e => {
+    if (!DJ.performance.mobile && !reduced) word.parentElement.addEventListener("pointermove", e => {
       const r = word.getBoundingClientRect();
       word.style.setProperty("--mx", ((e.clientX - r.left) / r.width * 100).toFixed(1) + "%");
       word.style.setProperty("--my", ((e.clientY - r.top) / r.height * 100).toFixed(1) + "%");
@@ -86,10 +86,28 @@ DJ.layout = (function () {
   function navBehaviour(nav) {
     const btn = nav.querySelector(".menu-btn");
     const bar = nav.querySelector(".scroll-progress");
-    const setOpen = (o) => { body.classList.toggle("menu-open", o); btn.setAttribute("aria-expanded", String(o)); };
+    const links = nav.querySelector(".nav__links"), mobileMenu = matchMedia("(max-width: 860px)");
+    const setOpen = (o) => {
+      body.classList.toggle("menu-open", o); btn.setAttribute("aria-expanded", String(o));
+      if (DJ.world && DJ.world.setCovered) DJ.world.setCovered(o);
+      document.dispatchEvent(new CustomEvent("dj:menu", { detail: { open: o } }));
+      links.inert = mobileMenu.matches && !o;
+      document.querySelectorAll("main.page,footer.footer").forEach(el => el.inert = o);
+      if (o) nav.classList.remove("is-hidden");
+    };
+    mobileMenu.addEventListener("change", () => setOpen(false));
+    setOpen(false);
     btn.addEventListener("click", () => setOpen(!body.classList.contains("menu-open")));
     nav.querySelectorAll(".nav__links a").forEach(a => a.addEventListener("click", () => setOpen(false)));
-    addEventListener("keydown", e => { if (e.key === "Escape") setOpen(false); });
+    addEventListener("keydown", e => {
+      if (!body.classList.contains("menu-open")) return;
+      if (e.key === "Escape") { setOpen(false); btn.focus(); }
+      if (e.key === "Tab") {
+        const controls = [...nav.querySelectorAll("a,button")], first = controls[0], last = controls[controls.length - 1];
+        if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+        else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+      }
+    });
     let lastY = scrollY;
     const onScroll = () => {
       const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
@@ -99,7 +117,8 @@ DJ.layout = (function () {
       lastY = y;
       bar.style.transform = `scaleX(${max > 0 ? Math.min(1, y / max) : 0})`;
     };
-    addEventListener("scroll", onScroll, { passive: true });
+    let scrollFrame = 0;
+    addEventListener("scroll", () => { if (!scrollFrame) scrollFrame = requestAnimationFrame(() => { scrollFrame = 0; onScroll(); }); }, { passive: true });
     onScroll();
   }
 
@@ -110,7 +129,7 @@ DJ.layout = (function () {
     el.setAttribute("aria-hidden", "true");
     el.innerHTML = "<span></span>".repeat(5);
     body.appendChild(el);
-    if (reduced) return el;
+    if (reduced || DJ.performance.mobile) return el;
     document.addEventListener("click", e => {
       const a = e.target.closest("a");
       if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || e.button !== 0) return;
@@ -130,7 +149,7 @@ DJ.layout = (function () {
 
   /* ---------- boot loader (first visit in a session) ---------- */
   function boot() {
-    const first = !store.get("dj-booted") && !reduced;
+    const first = !store.get("dj-booted") && !reduced && !DJ.performance.mobile;
     if (!first) return { first: false, progress() {}, finish: () => Promise.resolve() };
     store.set("dj-booted", "1");
     const el = document.createElement("div");
@@ -175,7 +194,7 @@ DJ.layout = (function () {
     navBehaviour(nav);
     const c = curtain();
     const b = boot();
-    if (!b.first && !reduced) c.classList.add("is-reveal");
+    if (!b.first && !reduced && !DJ.performance.mobile) c.classList.add("is-reveal");
     return { boot: b, curtain: c, base, page, url };
   }
 

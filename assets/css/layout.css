@@ -6,6 +6,7 @@
 
 /* ---------- 3D stage ---------- */
 .stage { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; display: block; }
+.stage, .stage-fallback { pointer-events: none; }
 .stage-fallback { position: fixed; inset: 0; z-index: 0; display: none; background: var(--void) center / cover no-repeat; }
 .no-webgl .stage-fallback { display: block; }
 .no-webgl .stage { display: none; }
@@ -103,6 +104,13 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero { position: relative; min-height: 100vh; min-height: 100svh; display: flex; align-items: flex-end; padding: calc(var(--nav-h) + 2rem) 0 clamp(3rem, 9vh, 6.5rem); }
 .hero .wrap { width: 100%; }
 .hero__copy { max-width: min(760px, 100%); }
+.hero__eyebrow { display: flex; align-items: center; gap: .65rem; margin-bottom: 1.35rem; font: 600 .7rem var(--body); letter-spacing: .18em; text-transform: uppercase; color: #d6d1f5; }
+.hero__eyebrow > span { width: 7px; height: 7px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 12px rgba(54, 230, 255, .5); }
+.hero__accent { color: #a8dbff; text-shadow: none; }
+.hero__accent .text-word__ink { background: linear-gradient(110deg, #ffb3ee, #c3a6ff 48%, #79efff); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.hero__details { display: flex; flex-wrap: wrap; gap: .8rem 1.6rem; margin-top: 1.6rem; color: #c3bddf; font-size: .75rem; letter-spacing: .04em; }
+.hero__details span + span { display: flex; align-items: center; gap: 1.6rem; }
+.hero__details span + span::before { content: ""; width: 3px; height: 3px; background: var(--cyan); border-radius: 50%; }
 .hero__sub { margin-top: 1.6rem; max-width: 42ch; font-size: clamp(1.05rem, 1.5vw, 1.22rem); color: #d9d4f7; text-shadow: 0 2px 22px rgba(7, 4, 24, .85); }
 .hero__cta { margin-top: 2rem; display: flex; flex-wrap: wrap; gap: .8rem; }
 .hero h1 { text-shadow: 0 4px 44px rgba(7, 4, 24, .6); }
@@ -117,6 +125,12 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 @keyframes cue { 60% { transform: translateY(11px); opacity: 0; } 61% { transform: none; opacity: 0; } 100% { opacity: 1; } }
 .hero--inner { min-height: 92vh; min-height: 92svh; }
 @media (max-width: 760px) {
+  .hero { padding-top: max(calc(var(--nav-h) + 2rem), clamp(17rem, 40vh, 24rem)); }
+  .hero { padding-top: max(calc(var(--nav-h) + 2rem), clamp(17rem, 40svh, 24rem)); }
+  .hero h1 { font-size: clamp(2.1rem, 8.8vw, 3.5rem); }
+  .hero.hero--inner h1 { font-size: clamp(1.9rem, 8.6vw, 3.5rem); }
+  .hero__sub { margin-top: 1.2rem; }
+  .hero__eyebrow { font-size: .62rem; letter-spacing: .14em; }
   .hero__hint, .scroll-cue { display: none; }
   .hero__cta .btn { flex: 1 1 auto; }
 }
@@ -144,3 +158,29 @@ body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-a
 .hero--inner h1 { font-size: clamp(2.4rem, 5.4vw, 5.2rem); }
 .brand span { white-space: nowrap; }
 @media (max-width: 420px) { .brand span { font-size: .8rem; } .brand img { width: 34px; height: 34px; } .menu-btn { padding: 0 .85rem; } }
+
+/* Limit large composited surfaces on phones; the 3D scene supplies the glow. */
+.mobile-device .grain, :root[data-quality="low"] .grain { display: none; }
+.mobile-device .nav.is-solid, :root[data-quality="low"] .nav.is-solid { background: rgba(7, 4, 24, .96); backdrop-filter: none; -webkit-backdrop-filter: none; }
+.mobile-device .footer, :root[data-quality="low"] .footer,
+.mobile-device body::before, :root[data-quality="low"] body::before { backdrop-filter: none; -webkit-backdrop-filter: none; }
+.mobile-device .btn, .mobile-device .stack__item { will-change: auto; }
+.motion-offscreen, .motion-offscreen *, .motion-offscreen::before, .motion-offscreen::after,
+.motion-offscreen *::before, .motion-offscreen *::after,
+.page-hidden *, .page-hidden *::before, .page-hidden *::after { animation-play-state: paused !important; }
+.menu-open .page *, .menu-open .footer * { animation-play-state: paused !important; }
+
+@media (max-width: 860px) {
+  /* Opacity and transform avoid repainting a full-screen animated clip-path. */
+  .nav__links { height: 100vh; height: 100dvh; overflow-y: auto; overscroll-behavior: contain; clip-path: none; visibility: hidden; opacity: 0; transform: translateY(-12px); pointer-events: none; backdrop-filter: none; -webkit-backdrop-filter: none; transition: opacity .25s ease, transform .3s var(--ease-out), visibility .3s; }
+  .menu-open .nav__links { clip-path: none; visibility: visible; opacity: 1; transform: none; pointer-events: auto; }
+  .menu-open .nav { transform: none; }
+  .nav .brand { min-width: 0; }
+  .nav__in > nav { display: contents; }
+  .nav .brand img { flex: none; }
+}
+@media (max-width: 360px) {
+  .nav__in { gap: .5rem; }
+  .nav .brand { gap: .4rem; }
+  .nav .brand span { white-space: normal; font-size: .7rem; line-height: 1.25; }
+}
