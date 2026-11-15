@@ -1,0 +1,125 @@
+/* ==========================================================================
+   DALJORD CREATIONS · base.css
+   Design tokens, reset, typography, buttons and small utilities.
+   Change brand colours and fonts here and the whole site follows.
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+
+  /* Brand palette (from the DJ shield and the industrial sunset art) */
+  --void: #070418;       /* page background, deep night */
+  --ink: #120c33;        /* raised surfaces */
+  --ink-2: #1b1446;
+  --cyan: #36e6ff;       /* the J */
+  --magenta: #ff46d6;    /* the D */
+  --violet: #9b6bff;
+  --ember: #ff8a2a;      /* sunset */
+  --lime: #7dff9a;       /* "out now" */
+  --text: #ece9ff;
+  --muted: #a9a3d3;
+  --line: rgba(170, 160, 255, .16);
+  --line-strong: rgba(170, 160, 255, .32);
+
+  /* Type */
+  --display: "Unbounded", "Arial Black", "Helvetica Neue", Arial, sans-serif;
+  --body: "Instrument Sans", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+
+  /* Layout */
+  --pad: clamp(1.25rem, 4vw, 3.5rem);
+  --max: 1280px;
+  --radius-lg: 30px;
+  --radius-md: 20px;
+  --nav-h: 72px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(.16, 1, .3, 1);
+  --ease-io: cubic-bezier(.65, 0, .35, 1);
+
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* The brand is a night scene, so the same palette applies in every system theme. */
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) { --void: #070418; --text: #ece9ff; } }
+:root[data-theme="dark"] { --void: #070418; --text: #ece9ff; }
+
+*, *::before, *::after { box-sizing: inherit; }
+html {
+  background: var(--void);
+  scroll-padding-top: calc(env(safe-area-inset-top, 0px) + var(--nav-h) + 12px);
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--void);
+  color: var(--text);
+  font-family: var(--body);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img, svg, canvas, video { display: block; max-width: 100%; }
+a { color: inherit; }
+button { font: inherit; color: inherit; }
+::selection { background: var(--magenta); color: #fff; }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+
+/* ---------- typography ---------- */
+h1, h2, h3, h4 { font-family: var(--display); margin: 0; font-weight: 700; letter-spacing: -.025em; }
+h1 { font-size: clamp(2.6rem, 7vw, 6.4rem); line-height: .95; font-weight: 800; letter-spacing: -.04em; }
+h2 { font-size: clamp(2rem, 5.2vw, 3.9rem); line-height: 1.02; }
+h3 { font-size: clamp(1.15rem, 2vw, 1.45rem); line-height: 1.2; }
+p { margin: 0; }
+.lede { color: var(--muted); max-width: 48ch; font-size: clamp(1.02rem, 1.4vw, 1.15rem); }
+.muted { color: var(--muted); }
+
+/* ---------- containers ---------- */
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 var(--pad); }
+.block { position: relative; padding: clamp(5rem, 12vw, 9.5rem) 0; }
+.block--tight { padding: clamp(3.5rem, 8vw, 6rem) 0; }
+.head { display: flex; justify-content: space-between; align-items: flex-end; gap: 1.5rem 4rem; flex-wrap: wrap; margin-bottom: clamp(2.5rem, 5vw, 4.5rem); }
+.head h2 { max-width: 15ch; }
+
+/* ---------- buttons ---------- */
+.btn {
+  --bc: var(--cyan);
+  position: relative;
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 52px; padding: 0 1.6rem;
+  border-radius: 999px; border: 1px solid transparent;
+  font: 600 1rem var(--body); text-decoration: none; cursor: pointer; white-space: nowrap;
+  transition: box-shadow .35s, background .25s, border-color .25s, color .25s;
+  will-change: transform;
+}
+.btn svg { width: 20px; height: 20px; flex: none; }
+.btn--main { background: var(--cyan); color: #05030f; }
+.btn--main:hover { box-shadow: 0 0 0 4px rgba(54, 230, 255, .18), 0 0 40px rgba(54, 230, 255, .55); }
+.btn--ghost { border-color: rgba(236, 233, 255, .28); background: rgba(7, 4, 24, .38); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.btn--ghost:hover { border-color: var(--magenta); box-shadow: 0 0 30px rgba(255, 70, 214, .38); }
+.btn--store { width: 100%; background: rgba(255, 255, 255, .06); border-color: var(--line); }
+.btn--store:hover { background: var(--bc); border-color: var(--bc); color: #05030f; box-shadow: 0 0 34px color-mix(in srgb, var(--bc) 60%, transparent); }
+.btn .btn__label { position: relative; z-index: 1; }
+
+/* ---------- chips ---------- */
+.chip { display: inline-flex; align-items: center; gap: .45rem; font-size: .85rem; font-weight: 600; padding: .3rem .8rem; border-radius: 999px; border: 1px solid currentColor; line-height: 1.25; white-space: nowrap; }
+.chip::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px currentColor; }
+.chip--live { color: var(--lime); }
+.chip--development { color: var(--cyan); }
+.chip--concept { color: var(--ember); }
+.chip--early { color: var(--violet); }
+.chip--quiet { color: var(--muted); }
+.chip--live::before, .chip--development::before { animation: blink 2.4s ease-in-out infinite; }
+@keyframes blink { 50% { opacity: .35; } }
+
+/* ---------- utilities ---------- */
+.sr-only { position: absolute !important; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.skip { position: absolute; left: -999px; top: 0; z-index: 200; background: var(--cyan); color: #05030f; padding: .6rem 1rem; border-radius: 8px; font-weight: 600; }
+.skip:focus { left: 1rem; top: calc(env(safe-area-inset-top, 0px) + 1rem); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; transition-delay: 0s !important; scroll-behavior: auto !important; }
+}
